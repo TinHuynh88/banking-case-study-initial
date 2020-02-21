@@ -71,21 +71,20 @@ public class AutoLoanController {
     }
 
     //deleteloan
-    @PutMapping(value = "/deleteLoan/{id}", produces = "application/json")
-    public String getLoandsByClientId(@PathVariable Long id){
+    @DeleteMapping(value = "/deleteLoan/{id}", produces = "application/json")
+    public String deleteLoan(@PathVariable Long id){
 
-        boolean isdelete;
         try {
-            isdelete = this.service.deleteLoan(id);
+            boolean isdelete = this.service.deleteLoan(id);
             if(!isdelete){
                 return "Recode not deleted";
             }
         }catch(Exception e){
 
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "False to update Loan id =" + autoLoan.getId(), e);
+                    HttpStatus.NOT_FOUND, "False to delete Loan id =" + id, e);
 
         }
-        return autoLoanUpdate;
+        return "Loan id = "+ id + " deleted success.";
     }
 }
