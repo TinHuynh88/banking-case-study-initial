@@ -1,6 +1,6 @@
 # Banking Case Study
 * Thanh Tin Pham Huynh 2000209
-* Finished AutoLoan, Deposit, CreditCard. Almost done for Orchestrator. 
+* Finished AutoLoan, Deposit, CreditCard. Orchestrator is done for Config, RestClient, Service. Not finished for Orchestrator Message.
 I changed OrchestratorApplication to 9080 because 9090 is in use.
 
 You're going to create a banking application.  The banking application has the following lines of business (LoBs):
