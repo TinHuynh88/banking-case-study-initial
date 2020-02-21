@@ -16,7 +16,7 @@ public class CreditCardController {
         this.service = service;
     }
     // create
-    @PostMapping(value = "/createCreditCard", produces = "application/json")
+    @PostMapping(value = "/creditcard/createCreditCard", produces = "application/json")
     public CreditCard createLoan(@RequestBody CreditCard creditCard){
         if(creditCard.getClientId()== null || creditCard.getName()==null || creditCard.getNumber()== null)
             return this.service.createCreditCard("No accounts available to show currently");
@@ -31,7 +31,7 @@ public class CreditCardController {
     }
 
     // getLoansByClientId
-    @GetMapping(value = "/getCreditCardsByClientId/{clientId}", produces = "application/json")
+    @GetMapping(value = "/creditcard/getCreditCardsByClientId/{clientId}", produces = "application/json")
     public List<CreditCard> getCreditCardsByClientId(@PathVariable String clientId){
         List<CreditCard> list;
         try {
@@ -44,7 +44,7 @@ public class CreditCardController {
     }
 
     // getAllLoans
-    @GetMapping(value = "/getAllCreditCards", produces = "application/json")
+    @GetMapping(value = "/creditcard/getAllCreditCards", produces = "application/json")
     public List<CreditCard> getAllCreditCards(){
         List<CreditCard> list;
         try {
@@ -57,7 +57,7 @@ public class CreditCardController {
     }
 
     //updateLoan
-    @PutMapping(value = "/updateCreditCard/{id}", produces = "application/json")
+    @PutMapping(value = "/creditcard/updateCreditCard/{id}", produces = "application/json")
     public CreditCard udpdateCreditCard(@PathVariable Long id, @RequestBody CreditCard creditCard){
         creditCard.setId(id);
         CreditCard autoCreditCardUpdate;
@@ -73,7 +73,7 @@ public class CreditCardController {
     }
 
     //deleteloan
-    @DeleteMapping(value = "/deleteCreditCard/{id}", produces = "application/json")
+    @DeleteMapping(value = "/creditcard/deleteCreditCard/{id}", produces = "application/json")
     public String deleteCreditCard(@PathVariable Long id){
 
         try {

@@ -1,7 +1,6 @@
-package com.example.banking.DepositModel;
+package com.example.banking.Model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 

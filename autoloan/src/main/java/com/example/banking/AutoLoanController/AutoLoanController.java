@@ -19,7 +19,7 @@ public class AutoLoanController {
     }
 
     // create
-    @PostMapping(value = "/createLoan", produces = "application/json")
+    @PostMapping(value = "/autoloan/createLoan", produces = "application/json")
     public AutoLoan createLoan(@RequestBody AutoLoan autoLoan){
         if(autoLoan.getClientId()== null || autoLoan.getName()==null)
             return this.service.createLoan("No accounts available to show currently");
@@ -28,7 +28,7 @@ public class AutoLoanController {
     }
 
     // getLoansByClientId
-    @GetMapping(value = "/getLoandsByClientId/{clientId}", produces = "application/json")
+    @GetMapping(value = "/autoloan/getLoandsByClientId/{clientId}", produces = "application/json")
     public List<AutoLoan> getLoandsByClientId(@PathVariable String clientId){
         List<AutoLoan> list;
         try {
@@ -41,7 +41,7 @@ public class AutoLoanController {
     }
 
     // getAllLoans
-    @GetMapping(value = "/getAllLoans", produces = "application/json")
+    @GetMapping(value = "/autoloan/getAllLoans", produces = "application/json")
     public List<AutoLoan> getAllLoans(){
         List<AutoLoan> list;
         try {
@@ -54,7 +54,7 @@ public class AutoLoanController {
     }
 
     //updateLoan
-    @PutMapping(value = "/updateLoan/{id}", produces = "application/json")
+    @PutMapping(value = "/autoloan/updateLoan/{id}", produces = "application/json")
     public AutoLoan getLoandsByClientId(@PathVariable Long id, @RequestBody AutoLoan autoLoan){
         autoLoan.setId(id);
         AutoLoan autoLoanUpdate;
@@ -70,7 +70,7 @@ public class AutoLoanController {
     }
 
     //deleteloan
-    @DeleteMapping(value = "/deleteLoan/{id}", produces = "application/json")
+    @DeleteMapping(value = "/autoloan/deleteLoan/{id}", produces = "application/json")
     public String deleteLoan(@PathVariable Long id){
 
         try {
