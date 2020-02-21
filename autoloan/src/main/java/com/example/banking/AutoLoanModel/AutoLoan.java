@@ -19,6 +19,12 @@ public class AutoLoan {
     public AutoLoan() {
     }
 
+    public AutoLoan(String clientId, String name, double balance){
+        this.clientId = clientId;
+        this.name = name;
+        this.balance = balance;
+    }
+
     public Long getId() {
         return id;
     }
@@ -59,5 +65,36 @@ public class AutoLoan {
                 ", name='" + name + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+
+    public static AutoLoanBuilder builder(){
+        return new AutoLoanBuilder();
+    }
+
+    public static final class AutoLoanBuilder {
+        private AutoLoan autoLoan;
+
+        private AutoLoanBuilder() {autoLoan = new AutoLoan();}
+
+        public AutoLoanBuilder withId(Long id){
+            autoLoan.setId(id);
+            return this;
+        }
+        public AutoLoanBuilder withClientId(String clientId){
+            autoLoan.setClientId(clientId);
+            return this;
+        }
+
+        public AutoLoanBuilder withName(String name){
+            autoLoan.setName(name);
+            return this;
+        }
+
+        public AutoLoanBuilder withBalance(double balance){
+            autoLoan.setBalance(balance);
+            return this;
+        }
+
+        public AutoLoan build(){return autoLoan;}
     }
 }
