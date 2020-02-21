@@ -1,4 +1,7 @@
 # Banking Case Study
+* Thanh Tin Pham Huynh 2000209
+* Finished AutoLoan, Deposit, CreditCard. Almost done for Orchestrator. 
+I changed OrchestratorApplication to 9080 because 9090 is in use.
 
 You're going to create a banking application.  The banking application has the following lines of business (LoBs):
 

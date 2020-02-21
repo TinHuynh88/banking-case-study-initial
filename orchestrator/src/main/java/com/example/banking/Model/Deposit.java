@@ -4,15 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 
-@Entity
-@SequenceGenerator(name="seq", initialValue=100000000, allocationSize=100)
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
 public class Deposit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
     private String clientId;
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private Long accountNumber;
     private String name;
     private double balance;

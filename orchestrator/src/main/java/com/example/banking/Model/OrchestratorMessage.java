@@ -15,7 +15,7 @@ public class OrchestratorMessage {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("AggregatorMessage{");
-        sb.append("message='").append(deposit).append('\'');
+        sb.append("message='").append('\'');
         sb.append('}');
         return sb.toString();
     }

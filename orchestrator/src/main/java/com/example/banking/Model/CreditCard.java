@@ -7,11 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
 public class CreditCard {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
     private String clientId;
     private String number;
