@@ -1,4 +1,4 @@
-package com.example.banking.AutoLoanModel;
+package com.example.banking.CreditCardModel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -9,29 +9,25 @@ import javax.persistence.Id;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class AutoLoan {
-
+public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String clientId;
+    private String number;
     private String name;
     private double balance;
 
     private String defaultMessage;
 
-
-    public AutoLoan() {
+    public CreditCard() {
     }
 
-    public AutoLoan(String clientId, String name, double balance){
+    public CreditCard(String clientId, String number, String name, double balance){
         this.clientId = clientId;
+        this.number = number;
         this.name = name;
         this.balance = balance;
-    }
-
-    public String getDefaultMessage() {
-        return defaultMessage;
     }
 
     public void setDefaultMessage(String defaultMessage) {
@@ -54,6 +50,14 @@ public class AutoLoan {
         this.clientId = clientId;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getName() {
         return name;
     }
@@ -70,49 +74,58 @@ public class AutoLoan {
         this.balance = balance;
     }
 
+    public String getDefaultMessage() {
+        return defaultMessage;
+    }
+
     @Override
     public String toString() {
-        return "AutoLoan{" +
+        return "CreditCard{" +
                 "id=" + id +
                 ", clientId='" + clientId + '\'' +
+                ", number='" + number + '\'' +
                 ", name='" + name + '\'' +
                 ", balance=" + balance +
                 '}';
     }
 
     //Builder
-    public static AutoLoanBuilder builder(){
-        return new AutoLoanBuilder();
+    public static CreditCardBuilder builder(){
+        return new CreditCardBuilder();
     }
 
-    public static final class AutoLoanBuilder {
-        private AutoLoan autoLoan;
+    public static final class CreditCardBuilder {
+        private CreditCard creditCard;
 
-        private AutoLoanBuilder() {autoLoan = new AutoLoan();}
+        private CreditCardBuilder() {creditCard = new CreditCard();}
 
-        public AutoLoanBuilder withId(Long id){
-            autoLoan.setId(id);
+        public CreditCardBuilder withId(Long id){
+            creditCard.setId(id);
             return this;
         }
-        public AutoLoanBuilder withClientId(String clientId){
-            autoLoan.setClientId(clientId);
-            return this;
-        }
-
-        public AutoLoanBuilder withName(String name){
-            autoLoan.setName(name);
+        public CreditCardBuilder withClientId(String clientId){
+            creditCard.setClientId(clientId);
             return this;
         }
 
-        public AutoLoanBuilder withDefaulMessage(String message){
-            autoLoan.setDefaultMessage(message);
+        public CreditCardBuilder withNumber(String number){
+            creditCard.setNumber(number);
             return this;
         }
-        public AutoLoanBuilder withBalance(double balance){
-            autoLoan.setBalance(balance);
+        public CreditCardBuilder withName(String name){
+            creditCard.setName(name);
             return this;
         }
 
-        public AutoLoan build(){return autoLoan;}
+        public CreditCardBuilder withDefaulMessage(String message){
+            creditCard.setDefaultMessage(message);
+            return this;
+        }
+        public CreditCardBuilder withBalance(double balance){
+            creditCard.setBalance(balance);
+            return this;
+        }
+
+        public CreditCard build(){return creditCard;}
     }
 }

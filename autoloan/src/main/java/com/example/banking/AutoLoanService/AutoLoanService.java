@@ -1,11 +1,9 @@
 package com.example.banking.AutoLoanService;
 import com.example.banking.AutoLoanModel.AutoLoan;
 import com.example.banking.AutoLoanRepository.AutoLoanRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AutoLoanService {
