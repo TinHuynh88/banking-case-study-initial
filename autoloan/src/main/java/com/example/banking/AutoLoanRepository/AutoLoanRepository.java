@@ -8,5 +8,6 @@ import java.util.List;
 public interface AutoLoanRepository extends CrudRepository<AutoLoan, Long> {
 
    List<AutoLoan> getAutoLoansByClientId(String clientId);
+   AutoLoan getAutoLoanById(Long id);
 
 }

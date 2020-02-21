@@ -3,10 +3,11 @@ package com.example.banking.AutoLoanController;
 import com.example.banking.AutoLoanModel.AutoLoan;
 import com.example.banking.AutoLoanService.AutoLoanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 public class AutoLoanController {
@@ -14,7 +15,6 @@ public class AutoLoanController {
 
     private AutoLoanService service;
 
-  //  public  AutoLoanController(){}
     public AutoLoanController(AutoLoanService service) {
         this.service = service;
     }
@@ -22,6 +22,70 @@ public class AutoLoanController {
     // create
     @PostMapping(value = "/createLoan", produces = "application/json")
     public AutoLoan createLoan(@RequestBody AutoLoan autoLoan){
+        if(autoLoan.getClientId()== null || autoLoan.getName()==null)
+            return this.service.createLoan("No accounts available to show currently");
+
     return this.service.createLoan(autoLoan.getClientId(),autoLoan.getName(),autoLoan.getBalance());
+    }
+
+    // getLoansByClientId
+    @GetMapping(value = "/getLoandsByClientId/{clientId}", produces = "application/json")
+    public List<AutoLoan> getLoandsByClientId(@PathVariable String clientId){
+        List<AutoLoan> list;
+        try {
+            list = this.service.getLoansByClientId(clientId);
+        }catch(Exception e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "ClientId [" + clientId + "] Not Found", e);
+        }
+        return list;
+    }
+
+    // getAllLoans
+    @GetMapping(value = "/getAllLoans", produces = "application/json")
+    public List<AutoLoan> getAllLoans(){
+        List<AutoLoan> list;
+        try {
+            list = this.service.getAllLoans();
+        }catch(Exception e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "There is no Loans", e);
+        }
+        return list;
+    }
+
+    //updateLoan
+    @PutMapping(value = "/updateLoan/{id}", produces = "application/json")
+    public AutoLoan getLoandsByClientId(@PathVariable Long id, @RequestBody AutoLoan autoLoan){
+        autoLoan.setId(id);
+        AutoLoan autoLoanUpdate;
+        try {
+            autoLoanUpdate = this.service.updateLoan(autoLoan);
+        }catch(Exception e){
+
+                    throw new ResponseStatusException(
+                            HttpStatus.NOT_FOUND, "False to update Loan id =" + autoLoan.getId(), e);
+
+        }
+        return autoLoanUpdate;
+    }
+
+    //deleteloan
+    @PutMapping(value = "/deleteLoan/{id}", produces = "application/json")
+    public String getLoandsByClientId(@PathVariable Long id){
+
+        boolean isdelete;
+        try {
+            isdelete = this.service.deleteLoan(id);
+            if(!isdelete){
+                return "Recode not deleted";
+            }
+        }catch(Exception e){
+
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "False to update Loan id =" + autoLoan.getId(), e);
+
+        }
+        return autoLoanUpdate;
     }
 }

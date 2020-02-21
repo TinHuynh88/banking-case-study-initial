@@ -1,11 +1,14 @@
 package com.example.banking.AutoLoanModel;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class AutoLoan {
 
     @Id
@@ -15,6 +18,8 @@ public class AutoLoan {
     private String name;
     private double balance;
 
+    private String defaultMessage;
+
 
     public AutoLoan() {
     }
@@ -23,6 +28,14 @@ public class AutoLoan {
         this.clientId = clientId;
         this.name = name;
         this.balance = balance;
+    }
+
+    public String getDefaultMessage() {
+        return defaultMessage;
+    }
+
+    public void setDefaultMessage(String defaultMessage) {
+        this.defaultMessage = defaultMessage;
     }
 
     public Long getId() {
@@ -90,6 +103,10 @@ public class AutoLoan {
             return this;
         }
 
+        public AutoLoanBuilder withDefaulMessage(String message){
+            autoLoan.setDefaultMessage(message);
+            return this;
+        }
         public AutoLoanBuilder withBalance(double balance){
             autoLoan.setBalance(balance);
             return this;

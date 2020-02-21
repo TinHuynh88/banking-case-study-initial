@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AutoLoanService {
@@ -12,11 +13,11 @@ public class AutoLoanService {
 
     private AutoLoanRepository autoLoanRepository;
 
-  // public  AutoLoanService(){}
     public AutoLoanService(AutoLoanRepository autoLoanRepository) {
         this.autoLoanRepository = autoLoanRepository;
     }
 
+    //Create
     public AutoLoan createLoan(String clientId, String name, double balance){
         AutoLoan autoLoan = AutoLoan.builder()
                 .withClientId(clientId)
@@ -25,32 +26,30 @@ public class AutoLoanService {
                 .build();
         return this.autoLoanRepository.save(autoLoan);
     }
-    public AutoLoan updateLoan(Long id, String clientId){
-        AutoLoan newAutoLoan = AutoLoan.builder()
-                .withId(id)
-                .withClientId(clientId)
+    public AutoLoan createLoan(String defaulMessage){
+        AutoLoan autoLoan = AutoLoan.builder()
+                .withDefaulMessage(defaulMessage)
                 .build();
-        return this.autoLoanRepository.save(newAutoLoan);
+        return autoLoan;
     }
 
-    public AutoLoan updateLoan(Long id, String clientId, String name){
-        AutoLoan newAutoLoan = AutoLoan.builder()
-                .withId(id)
-                .withClientId(clientId)
-                .withName(name)
-                .build();
-        return this.autoLoanRepository.save(newAutoLoan);
+    //Update
+    public AutoLoan updateLoan(AutoLoan autoLoan){
+
+        AutoLoan autoLoanupdate = this.autoLoanRepository.getAutoLoanById(autoLoan.getId());
+        if(autoLoan.getClientId() != null){
+            autoLoanupdate.setClientId(autoLoan.getClientId());
+        }
+        if(autoLoan.getName() != null){
+            autoLoanupdate.setName(autoLoan.getName());
+        }
+        if(autoLoan.getBalance() != 0){
+            autoLoanupdate.setBalance(autoLoan.getBalance());
+        }
+        return this.autoLoanRepository.save(autoLoanupdate);
     }
 
-    public AutoLoan updateLoan(Long id, String clientId, String name, double balance){
-        AutoLoan newAutoLoan = AutoLoan.builder()
-                .withId(id)
-                .withClientId(clientId)
-                .withName(name)
-                .withBalance(balance)
-                .build();
-        return this.autoLoanRepository.save(newAutoLoan);
-    }
+    //deleteLoan
     public boolean deleteLoan(Long id){
 
         boolean success = true;
@@ -63,10 +62,12 @@ public class AutoLoanService {
         return success;
     }
 
-//    public List<AutoLoan> getLoansByClientId(String clientId){
-//        return (List<AutoLoan>) this.autoLoanRepository.getAutoLoanByClientId(clientId);
-//    }
-//
+    //getLoansByClientId
+    public List<AutoLoan> getLoansByClientId(String clientId){
+        return (List<AutoLoan>) this.autoLoanRepository.getAutoLoansByClientId(clientId);
+    }
+
+    //getAllLoans
     public List<AutoLoan> getAllLoans(){
         return (List<AutoLoan>) this.autoLoanRepository.findAll();
     }
